@@ -1,0 +1,25 @@
+# Allow recovery to set and get properties
+allow recovery default_prop:property_service { set add };
+
+# Allow access to block devices
+allow recovery block_device:blk_file { read write getattr ioctl };
+
+# Allow recovery to execute files in /sbin
+allow recovery recovery_exec:file { execute getattr read open };
+
+# Allow mounting filesystems
+allow recovery fs_type:filesystem { mount unmount };
+
+# Access temporary filesystems and directories
+allow recovery recovery_tmpfs:file { create getattr write unlink read open };
+allow recovery recovery_tmpfs:dir { search getattr add_name remove_name write };
+
+# Allow recovery to access and manage /dev/socket
+allow recovery socket_device:sock_file { write getattr unlink create };
+
+# Allow recovery to manage /dev/block
+allow recovery dm_device:blk_file { read write ioctl getattr };
+
+# Add permissions for accessing /dev/kmsg and logging
+allow recovery kmsg_device:chr_file { write getattr open };
+

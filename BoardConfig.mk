@@ -39,7 +39,7 @@ TARGET_KERNEL_ARCH := arm
 TARGET_KERNEL_HEADER_ARCH := arm
 BOARD_BOOTIMG_HEADER_VERSION := 2
 BOARD_KERNEL_BASE := 0x40000000
-BOARD_KERNEL_CMDLINE := bootopt=64S3,32S1,32S1 androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE := bootopt=64S3,32S1,32S1 selinux=0
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_RAMDISK_OFFSET := 0x05000000
 BOARD_KERNEL_TAGS_OFFSET := 0x04000000
@@ -80,6 +80,10 @@ BOARD_SUPER_PARTITION_SIZE := 9126805504 # TODO: Fix hardcoded value
 BOARD_SUPER_PARTITION_GROUPS := tcl_dynamic_partitions
 BOARD_TCL_DYNAMIC_PARTITIONS_PARTITION_LIST := system vendor product
 BOARD_TCL_DYNAMIC_PARTITIONS_SIZE := 9122611200 # TODO: Fix hardcoded value
+BOARD_SYSTEM_AS_ROOT := true
+
+# SELinux
+BOARD_RECOVERY_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy-minimal
 
 # Platform
 TARGET_BOARD_PLATFORM := mt6739
@@ -89,10 +93,8 @@ TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/recovery.fstab
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 
-# Hack: prevent anti rollback
-PLATFORM_SECURITY_PATCH := 2099-12-31
-VENDOR_SECURITY_PATCH := 2099-12-31
-PLATFORM_VERSION := 16.1.0
+# Security patch level
+VENDOR_SECURITY_PATCH := 2021-12-01
 
 # Verified Boot
 BOARD_AVB_ENABLE := true
@@ -111,12 +113,16 @@ TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_EXTRA_LANGUAGES := false
 TW_USE_TOOLBOX := true
 TW_INCLUDE_REPACKTOOLS := true
+TW_EXCLUDE_APEX := true
 TW_NO_FASTBOOT_BOOT := true
+TW_INCLUDE_CRYPTO := true
+RECOVERY_DATA_ON_SDCARD := true
 
 #Brightness
 TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
 TW_DEFAULT_BRIGHTNESS := 1400
 TW_MAX_BRIGHTNESS := 2048
+TW_FRAMERATE := 30
 
 #logs
 TARGET_USES_LOGD := true
@@ -125,10 +131,5 @@ TWRP_INCLUDE_LOGCAT := true
 # USB
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 
-# Storage
-RECOVERY_SDCARD_ON_DATA := true
-
 # Auto copy files placed in device/tcl/gflip6tf/recovery/root inside recovery ramdisk
 TARGET_RECOVERY_DEVICE_DIRS += device/tcl/gflip6tf
-
--include vendor/tcl/gflip6tf/BoardConfigVendor.mk

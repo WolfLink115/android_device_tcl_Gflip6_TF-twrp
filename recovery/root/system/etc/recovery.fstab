@@ -1,11 +1,12 @@
 #core
-/                                       /system	        ext4	     rw                                              wait,logical
-/vendor	                                /vendor		ext4	     rw                                              wait,logical
-/product                                /product        ext4	     rw                                              wait,logical
+/                                       /system	        ext4	     ro                                              wait,logical
+/vendor	                                /vendor		ext4	     ro                                              wait,logical
+/product                                /product        ext4	     ro                                              wait,logical
 
 #data
 /dev/block/by-name/md_udc             /metadata         ext4         noatime,nosuid,nodev,discard                    wait,check,formattable,first_stage_mount
-/dev/block/by-name/userdata           /data             ext4         noatime,nosuid,nodev,discard,noflush_merge,fsync_mode=nobarrier,reserve_root=134217,resgid=1065,inlinecrypt wait,check,formattable,quota,latemount,resize,reservedsize=128m,checkpoint=fs,fileencryption=aes-256-xts:aes-256-cts:v2,,keydirectory=/metadata/vold/metadata_encryption
+/dev/block/by-name/userdata           /data             ext4         noatime,nosuid,nodev,discard,noflush_merge,fsync_mode=nobarrier,reserve_root=134217,resgid=1065,inlinecrypt wait,check,formattable,quota,latemount,resize,reservedsize=128m,checkpoint=fs
+/dev/block/by-name/cache              /cache            ext4         noatime,nosuid,nodev wait,check,formattable
 
 #persist
 /dev/block/by-name/persist            /mnt/vendor/persist ext4 noatime,nosuid,nodev,noauto_da_alloc,commit=1,nodelalloc  wait,check,formattable

@@ -1,0 +1,8 @@
+/sbin/recovery                     u:object_r:recovery_exec:s0
+/dev/block/bootdevice/by-name/*    u:object_r:block_device:s0
+/dev/kmsg                          u:object_r:kmsg_device:s0
+/tmp                               u:object_r:recovery_tmpfs:s0
+/data/media                        u:object_r:media_rw_data_file:s0
+/dev/socket/*                      u:object_r:socket_device:s0
+/dev/block/dm-*                    u:object_r:dm_device:s0
+
