@@ -7,17 +7,17 @@
 
 DEVICE_PATH := device/tcl/gflip6tf
 
-# Common init scripts
-PRODUCT_PACKAGES += \
-    init.mt6739.rc
-
-# Android FSTAB
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/recovery/root/etc/fstab.mt6739:/system/etc/fstab.mt6739
-
 # Input
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/keylayout/gpio_keys.kl:system/usr/keylayout/qwerty.kl \
     $(DEVICE_PATH)/keylayout/matrix-keypad.kl:system/usr/keylayout/qwerty.kl \
     $(DEVICE_PATH)/keylayout/mtk-kpd.kl:system/usr/keylayout/qwerty.kl \
     $(DEVICE_PATH)/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl
+
+# fastbootd
+PRODUCT_PACKAGES += \
+    android.hardware.fastboot@1.1-impl-mock \
+    fastbootd
+
+# VNDK
+PRODUCT_TARGET_VNDK_VERSION := 31
