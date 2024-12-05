@@ -2,6 +2,7 @@
 /                                       /system	        ext4	     ro                                              wait,logical
 /vendor	                                /vendor		ext4	     ro                                              wait,logical
 /product                                /product        ext4	     ro                                              wait,logical
+/dev/block/by-name/super                /super          emmc                                                         defaults
 
 #data
 /dev/block/by-name/md_udc             /metadata         ext4         noatime,nosuid,nodev,discard                    wait,check,formattable,first_stage_mount
@@ -16,3 +17,11 @@
 /dev/block/by-name/boot               /boot               emmc defaults
 /dev/block/by-name/vbmeta_system      /vbmeta_system      emmc defaults first_stage_mount,nofail,avb=vbmeta
 /dev/block/by-name/vbmeta             /vbmeta             emmc defaults defaults
+
+#other
+/dev/block/by-name/frp                /persistent         emmc defaults
+/dev/block/by-name/mcupmfw            /mcupmfw            emmc defaults
+/dev/block/by-name/gz1                /gz1                emmc defaults
+/dev/block/by-name/gz2                /gz2                emmc defaults
+/dev/block/by-name/loader_ext1        /loader_ext1        emmc defaults
+/dev/block/by-name/loader_ext2        /loader_ext2        emmc defaults
